@@ -149,11 +149,11 @@ jobs:
 
       - name: Dummy step 7
         continue-on-error: true
-        uses: PG-Momik/shared-actions/actions/action-9@5bde4226c2dd602dce17645d1c271a8c5f79f3ea
+        uses: PG-Momik/shared-actions/actions/action-9@4fb866cd843bb1af966132c7d5f71d9d56f07bb3
 
       - name: Dummy step 8
         continue-on-error: true
-        uses: PG-Momik/shared-actions/actions/action-10@5bde4226c2dd602dce17645d1c271a8c5f79f3ea
+        uses: PG-Momik/shared-actions/actions/action-10@4fb866cd843bb1af966132c7d5f71d9d56f07bb3
 
       - name: Dummy step 9
         run: echo "dummy step"
