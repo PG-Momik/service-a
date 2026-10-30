@@ -185,7 +185,7 @@ jobs:
         run: echo "dummy step"
 
   job-5:
-    name: Job 5
+    name: Required check 1
     needs: [job-1, job-2, job-4]
     runs-on: ubuntu-latest
     if: always()
