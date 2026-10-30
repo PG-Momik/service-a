@@ -1,0 +1,194 @@
+name: Workflow 2
+
+on:
+  workflow_call:
+  merge_group:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  job-1:
+    name: Job 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dummy step 1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Dummy step 2
+        run: echo "dummy step"
+      - name: Dummy step 3
+        run: echo "dummy step"
+      - name: Dummy step 4
+        id: step-1
+        run: echo "dummy step"
+      - name: Dummy step 5
+        run: echo "dummy step"
+      - name: Dummy step 6
+        run: echo "dummy step"
+      - name: Dummy step 7
+        run: echo "dummy step"
+      - name: Dummy step 8
+        run: echo "dummy step"
+
+  job-2:
+    name: Job 2
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        shard_index: [0, 1, 2, 3]
+        total: [4]
+    steps:
+      - name: Dummy step 1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Dummy step 2
+        run: echo "dummy step"
+      - name: Dummy step 3
+        id: step-1
+        run: echo "dummy step"
+      - name: Dummy step 4
+        run: echo "dummy step"
+      - name: Dummy step 5
+        run: echo "dummy step"
+      - name: Dummy step 6
+        run: echo "dummy step"
+      - name: Dummy step 7
+        run: echo "dummy step"
+      - name: Dummy step 8
+        run: echo "dummy step"
+      - name: Dummy step 9
+        run: echo "dummy step"
+
+      - name: Dummy step 10
+        continue-on-error: true
+        run: echo "dummy step"
+
+      - name: Dummy step 11
+        if: hashFiles('junit-timings/junit.xml') == ''
+        continue-on-error: true
+        run: echo "dummy step"
+
+      - name: Dummy step 12
+        if: hashFiles('junit-timings/junit.xml') != ''
+        run: echo "dummy step"
+
+      - name: Dummy step 13
+        id: step-2
+        if: hashFiles('junit-timings/junit.xml') != ''
+        run: echo "dummy step"
+
+      - name: Dummy step 14
+        if: steps.step-2.outputs.valid != 'true'
+        run: echo "dummy step"
+
+      - name: Dummy step 15
+        id: step-3
+        run: echo "dummy step"
+
+      - name: Dummy step 16
+        run: echo "dummy step"
+
+      - name: Dummy step 17
+        if: success()
+        run: echo "dummy step"
+
+      - name: Dummy step 18
+        if: always()
+        run: echo "dummy step"
+
+      - name: Dummy step 19
+        if: always()
+        run: echo "dummy step"
+
+      - name: Dummy step 20
+        if: always()
+        run: echo "dummy step"
+
+      - name: Dummy step 21
+        if: always()
+        run: echo "dummy step"
+
+      - name: Dummy step 22
+        if: failure()
+        run: echo "dummy step"
+
+  job-3:
+    name: Job 3
+    needs: job-2
+    runs-on: ubuntu-latest
+    if: always() && needs.job-2.result == 'success'
+    steps:
+      - name: Dummy step 1
+        run: echo "dummy step"
+
+      - name: Dummy step 2
+        run: echo "dummy step"
+
+      - name: Dummy step 3
+        run: echo "dummy step"
+
+      - name: Dummy step 4
+        run: echo "dummy step"
+
+      - name: Dummy step 5
+        run: echo "dummy step"
+
+      - name: Dummy step 6
+        run: echo "dummy step"
+
+      - name: Dummy step 7
+        continue-on-error: true
+        uses: PG-Momik/shared-actions/actions/action-9@5bde4226c2dd602dce17645d1c271a8c5f79f3ea
+
+      - name: Dummy step 8
+        continue-on-error: true
+        uses: PG-Momik/shared-actions/actions/action-10@5bde4226c2dd602dce17645d1c271a8c5f79f3ea
+
+      - name: Dummy step 9
+        run: echo "dummy step"
+
+  job-4:
+    name: Job 4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dummy step 1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Dummy step 2
+        run: echo "dummy step"
+      - name: Dummy step 3
+        id: step-1
+        run: echo "dummy step"
+      - name: Dummy step 4
+        run: echo "dummy step"
+      - name: Dummy step 5
+        run: echo "dummy step"
+      - name: Dummy step 6
+        run: echo "dummy step"
+      - name: Dummy step 7
+        run: echo "dummy step"
+      - name: Dummy step 8
+        run: echo "dummy step"
+      - name: Dummy step 9
+        run: echo "dummy step"
+      - name: Dummy step 10
+        run: echo "dummy step"
+
+  job-5:
+    name: Job 5
+    needs: [job-1, job-2, job-4]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Dummy step 1
+        run: echo "dummy step"

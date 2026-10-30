@@ -1,0 +1,53 @@
+name: Workflow 6
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'workflow-6/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  job-1:
+    name: Job 1
+    if: >-
+      ${{ github.event.pull_request.head.repo.full_name == github.repository &&
+          github.event.pull_request.user.type != 'Bot' &&
+          !contains(fromJSON('["dev","staging"]'), github.head_ref) &&
+          vars.VAR_1 != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - variant: 1
+          - variant: 2
+          - variant: 3
+          - variant: 4
+          - variant: 5
+          - variant: 6
+    steps:
+      - name: Dummy step 1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Dummy step 2
+        run: echo "dummy step"
+
+      - name: Dummy step 3
+        run: echo "dummy step"
+
+      - name: Dummy step 4
+        run: echo "dummy step"
+
+      - name: Dummy step 5
+        run: echo "dummy step"

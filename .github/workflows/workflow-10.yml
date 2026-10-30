@@ -1,0 +1,22 @@
+on: [push]
+
+name: Workflow 10
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  job-1:
+    if: ${{ github.event_name != 'push' || github.actor != 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    name: Job 1
+    steps:
+      - name: Dummy step 1
+        uses: actions/checkout@v6
+      - name: Dummy step 2
+        id: step-1
+        run: echo "dummy step"

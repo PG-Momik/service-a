@@ -1,0 +1,28 @@
+name: Workflow 3
+
+on:
+  pull_request:
+    branches:
+      - master
+      - staging
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+  merge_group:
+    branches:
+      - master
+      - staging
+
+permissions:
+  contents: read
+
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dummy step 1
+        uses: PG-Momik/shared-actions/actions/action-2@5bde4226c2dd602dce17645d1c271a8c5f79f3ea
+        with:
+          use-master: true

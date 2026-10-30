@@ -1,0 +1,7 @@
+[
+  { "name": "A", "enabled": true },
+  { "name": "B", "enabled": true },
+  { "name": "C", "enabled": true },
+  { "name": "D", "enabled": true },
+  { "name": "E (unfinished)", "enabled": false }
+]

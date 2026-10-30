@@ -1,0 +1,62 @@
+name: Workflow 17
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - dev
+      - staging
+  pull_request:
+    paths:
+      - 'workflow-17/**'
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  job-1:
+    name: Job 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dummy step 1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: Dummy step 2
+        run: echo "dummy step"
+
+      - name: Dummy step 3
+        id: step-1
+        run: echo "dummy step"
+
+      - name: Dummy step 4
+        run: echo "dummy step"
+
+      - name: Dummy step 5
+        run: echo "dummy step"
+
+      - name: Dummy step 6
+        run: echo "dummy step"
+
+      - name: Dummy step 7
+        run: echo "dummy step"
+
+      - name: Dummy step 8
+        run: echo "dummy step"
+
+      - name: Dummy step 9
+        run: echo "dummy step"
+
+      - name: Dummy step 10
+        run: echo "dummy step"
+
+      - name: Dummy step 11
+        run: echo "dummy step"
+
+      - name: Dummy step 12
+        if: failure()
+        run: echo "dummy step"

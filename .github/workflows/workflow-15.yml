@@ -1,0 +1,45 @@
+name: Workflow 15
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  job-1:
+    name: Job 1
+    if: >-
+      ${{ github.event.pull_request.head.repo.full_name == github.repository &&
+          github.event.pull_request.user.type != 'Bot' &&
+          !contains(fromJSON('["dev","staging"]'), github.head_ref) &&
+          vars.VAR_1 != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Dummy step 1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Dummy step 2
+        run: echo "dummy step"
+
+      - name: Dummy step 3
+        id: step-1
+        run: echo "dummy step"
+
+      - name: Dummy step 4
+        run: echo "dummy step"
+
+      - name: Dummy step 5
+        run: echo "dummy step"

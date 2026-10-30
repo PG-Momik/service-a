@@ -1,0 +1,26 @@
+name: Workflow 13
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  job-1:
+    name: Job 1
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Dummy step 1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Dummy step 2
+        run: echo "dummy step"
+
+      - name: Dummy step 3
+        run: echo "dummy step"
+
+      - name: Dummy step 4
+        run: echo "dummy step"
